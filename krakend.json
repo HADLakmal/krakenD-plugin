@@ -1,0 +1,45 @@
+{
+    "version": 3,
+    "port": 8080,
+    "name": "KrakenD response modifier demo",
+    "host": ["https://api.github.com"],
+    "plugin": {
+      "pattern":".so",
+      "folder": "./"
+    },
+    "endpoints": [
+      {
+        "endpoint": "/github/orgs/{org}",
+        "backend":[
+          {
+            "url_pattern": "/orgs/{org}",
+            "allow": [
+              "avatar_url",
+              "blog",
+              "followers"
+            ],
+            "group": "org",
+            "extra_config":{
+              "plugin/req-resp-modifier":{
+                "name":["response-plugin"],
+                "response-plugin":{
+                    "extra-header":"test"
+                }
+              }
+            }
+          }
+        ],
+        "extra_config":{
+          "plugin/req-resp-modifier":{
+            "name": [
+                  "response-plugin"
+            ],
+            "response-plugin":{
+                "extra-header":"test"
+            }
+          }
+        }
+      }
+    ]
+  }
+  
